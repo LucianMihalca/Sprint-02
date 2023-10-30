@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
-    "cli": "ts-node ./src/cli/cli.ts",
+    "cli": "node dist/cli/front_cli.js",
     "start": "ts-node ./src/index.ts",
     "build": "tsc",
     "build-webpack": "webpack --mode production",
