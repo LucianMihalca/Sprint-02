@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(54, 112, 199);
+  color: white;
+  font-family: "Space Grotesk", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+span {
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 0.3rem 2rem 0.3rem 0.3rem;
+  border-radius: 0rem 2rem 2rem 0rem;
+}
+.form {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  padding: 5%;
+  gap: 30px;
+}
+
+input {
+  padding: 0.5rem;
+  padding-left: 1rem;
+  font-size: 1.8rem;
+  border: none;
+  background: white;
+  border-radius: 2rem;
+}
+.handle {
+  min-height: 10vh;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 100;
+  font-size: 1.4rem;
+  gap: 20px;
+  
+  
+}
+.handle b {
+  font-weight: 400;
+  font-size: 1.4rem;
+  letter-spacing: 1.5px;
+  color: black;
+  padding: 0.3rem 0.5rem 0.3rem 1rem;
+  background-color: white;
+  border-radius: 2rem 0rem 0rem 2rem;
+ 
+}

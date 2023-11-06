@@ -1,56 +1,69 @@
 import inquirer from "inquirer";
 import { debounce } from "./debounce_cli.js";
 
-let counter = 0;
-
-let debouncedFunction = debounce((arg) => {
-  console.log(`Callback ejecutado con argumento: ${arg}. Número de peticiones intentadas: ${counter}`);
-  // Después de ejecutar el callback, preguntamos si el usuario quiere continuar o salir.
-  askToContinue();
-}, 300);
-
-const askQuestions = () => {
-  counter = 0; // Reiniciamos el contador cuando empezamos un nuevo ciclo de preguntas.
-  const questions = [
+// Realiza las preguntas al usuario .
+function getInputs() {
+  return inquirer.prompt([
     {
       type: "input",
-      name: "arg",
-      message: "Introduce el argumento presiona Enter (string o número):",
-      // Aquí incrementamos el contador cada vez que el usuario escribe algo.
-      transformer: (input: string) => {
-        counter++;
-        return input;
-      },
+      name: "inputValue",
+      message: " Ingrese tu consulta ...",
     },
-  ];
-
-  inquirer.prompt(questions).then((answers) => {
-    const { arg } = answers;
-    debouncedFunction(arg);
-  });
-};
-
-const askToContinue = () => {
-  inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "continue",
-        message: "¿Qué deseas hacer a continuación?",
-        choices: ["Continuar", "Salir"],
-        default: "Continuar",
+    {
+      type: "number",
+      name: "delay",
+      message: "Ingrese el retraso para la función debounce:",
+      default: () => 250, // Valor por defecto.
+      validate: (value) => {
+        if (isNaN(value)) {
+          return "Por favor, ingrese un número válido.";
+        }
+        return true;
       },
-    ])
-    .then((answer) => {
-      if (answer.continue === "Continuar") {
-        askQuestions(); // Reiniciamos el ciclo de preguntas.
-      } else {
-        // Salimos del programa.
-        console.log("Saliendo del programa.");
-        process.exit(0);
-      }
-    });
-};
+      filter: (value) => parseInt(value), // Utilizamos la function ParseInt() para validar el valor.
+    },
+  ]);
+}
 
-// Llamamos a la función para iniciar el ciclo de preguntas.
-askQuestions();
+// Ejecuta el proceso de debounce y espera que se complete antes de preguntar para repetir
+function runDebounce(inputValue: string, delay: number): Promise<void> {
+  return new Promise<void>((resolve) => {
+    const debouncedFunction = debounce((input) => {
+      console.log("Debounced value:", input);
+      resolve();
+    }, delay);
+
+    debouncedFunction(inputValue);
+  });
+}
+
+// Pregunta al usuario si quiere repetir el proceso
+function askRepeat() {
+  return inquirer.prompt([
+    {
+      type: "confirm",
+      name: "repeat",
+      message: "¿Quieres realizar otra consulta ?",
+      default: false,
+    },
+  ]);
+}
+
+//  ejecuta el CLI
+function main() {
+  getInputs().then((answers) => {
+    // se completa el debounce y después vuelve a preguntar si quiere repetir el proceso.
+    runDebounce(answers.inputValue, answers.delay).then(() => {
+      askRepeat().then((answer) => {
+        if (answer.repeat) {
+          main(); // Si el usuario quiere repetir, vuelve a llamar a main()
+        } else {
+          console.log("See you later alligator :)");
+          process.exit();
+        }
+      });
+    });
+  });
+}
+
+main();

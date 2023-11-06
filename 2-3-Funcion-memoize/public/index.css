@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(54, 112, 199);
+  color: white;
+  font-family: "Space Grotesk", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+span {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 2rem 0.5rem 0.3rem;
+  border-radius: 0rem 2rem 2rem 0rem;
+  width: 70%;
+  
+}
+.info_message{
+  display: flex;
+  flex-direction: row;
+}
+
+.form {
+  width: 100%;
+  max-width: 650px;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2%;
+  gap: 2rem;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  background: white;
+  border-radius: 2rem;
+  width: 100%;
+}
+#resetButton {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+  border: none;
+  background-color: #bde038;
+  border-radius: 2rem;
+  width: 100%;
+  color:#042940;
+}
+
+.handle {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 1.2rem; /* Ajusta al tamaño deseado */
+}
+
+.handle b {
+  font-weight: 500; /* Ajusta al peso deseado para mejor legibilidad */
+  color: black;
+  padding: 0.5rem; /* Ajusta el padding para un mejor toque visual */
+  background-color: white;
+  border-radius: 2rem 0rem 0rem 2rem;
+  display: inline-block;
+  width: 30%;
+}
+#error {
+  background-color: #ff5f5d;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border-radius: 2rem;
+  
+}

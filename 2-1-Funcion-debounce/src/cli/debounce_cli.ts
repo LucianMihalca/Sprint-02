@@ -1,4 +1,4 @@
-export type ValidTypes = string | number ; // Asumiendo que estos son los tipos válidos para tu callback
+export type ValidTypes = string | number ; 
 export type CallbackType = (arg: ValidTypes) => void;
 
 export function debounce(cb: CallbackType, delay: number): CallbackType {

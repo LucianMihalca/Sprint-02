@@ -1,4 +1,4 @@
-import { debounce } from "../debounce";
+import { debounce } from "../modelo";
 
 describe("Función debounce", () => {
   it("Debería llamar a debouncedFn después del tiempo especificado", (done) => {
@@ -18,20 +18,20 @@ describe("Función debounce", () => {
     const mockFn = jest.fn();
     const debouncedFn = debounce(mockFn, 500);
 
-    // Llamar tres veces rápidamente a la función debounced
+    // REalizamos las tres llamadas de prueba
     debouncedFn("test1");
     debouncedFn("test2");
     debouncedFn("test3");
 
-    // Asegurarse de que la función original no se haya llamado todavía
+    // comprobamos que  no se haya llamado todavía
     expect(mockFn).not.toHaveBeenCalled();
 
     // Esperar 500 ms
     setTimeout(() => {
-      // La función original debería haber sido llamada una sola vez
+      //se espera que solo se ha realizado 1 llamada
       expect(mockFn).toHaveBeenCalledTimes(1);
 
-      // El último valor pasado debería ser 'test3'
+      // esperamos que el ultimo valor es 'test3'
       expect(mockFn).toHaveBeenCalledWith("test3");
 
       done();
@@ -86,17 +86,16 @@ describe("Función debounce", () => {
 
   it("No deberia llamra a debouncedFn antes de trascurir los 200ms de retardo", (done) => {
     const mockFn = jest.fn(); // Función simulada para probar
-    const debouncedFn = debounce(mockFn, 200); // Función debounced con 200 ms de retardo
+    const debouncedFn = debounce(mockFn, 200); //  200 ms de retardo
 
-    // Llama a la función debounced
     debouncedFn("Hola Mundo");
 
-    // Verifica que la función original no se haya llamado inmediatamente
+    // nos aseguramos que no se llamo seguido
     expect(mockFn).not.toHaveBeenCalled();
 
-    // Espera 400 ms para estar seguro de que la función original se haya llamado
+    // nos aseguramos que llamo a la function original y damos un margen de 400ms.
     setTimeout(() => {
-      // Verifica que la función original se haya llamado
+      // esperamos que se llamo a la function original
       expect(mockFn).toHaveBeenCalled();
       done();
     }, 400);

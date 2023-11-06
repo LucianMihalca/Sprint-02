@@ -1,6 +1,5 @@
-import { InputModel } from "./modelo";
+import { InputModel, ValidTypes, debounce } from "./modelo";
 import { updateDefaultText, updateDebouncedText } from "./vista";
-import { ValidTypes, debounce } from "./debounce";
 
 const handleDebouncedCount = (model: InputModel) => {
   const newCount = model.incrementDebouncedCount();
@@ -17,7 +16,7 @@ function initialize() {
   input.addEventListener("input", (e) => {
     const target = e.target as HTMLInputElement;
     updateDefaultText(defaultText, target.value);
-    console.log(`Default requests --> : ${model.incrementDefaultCount()}`);
+    console.log(`Default requests aaa--> : ${model.incrementDefaultCount()}`);
   });
 
   const updateDebounceText = debounce((text: ValidTypes): void => {
@@ -25,7 +24,6 @@ function initialize() {
       updateDebouncedText(debounceText, text);
       handleDebouncedCount(model);
     }
-    // Puedes añadir más lógica aquí para manejar otros tipos
   }, 550);
 
   input.addEventListener("input", (e) => {

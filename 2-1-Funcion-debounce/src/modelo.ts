@@ -1,14 +1,34 @@
 export class InputModel {
-  defaultInputCount: number = 0;
-  debouncedInputCount: number = 0;
+  defaultInputCount: number;
+  debouncedInputCount: number;
 
-  incrementDefaultCount() {
+  constructor() {
+    this.defaultInputCount = 0;
+    this.debouncedInputCount = 0;
+  }
+
+  incrementDefaultCount(): number {
     this.defaultInputCount++;
     return this.defaultInputCount;
   }
 
-  incrementDebouncedCount() {
+  incrementDebouncedCount(): number {
     this.debouncedInputCount++;
     return this.debouncedInputCount;
   }
+}
+
+export type ValidTypes = string | number | symbol;
+
+export type CallbackType = (arg: ValidTypes) => void;
+
+export function debounce(cb: CallbackType, delay: number): CallbackType {
+  let timeout: NodeJS.Timeout | null = null;
+
+  return (arg: ValidTypes): void => {
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => cb(arg), delay);
+  };
 }
